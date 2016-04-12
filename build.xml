@@ -1,0 +1,43 @@
+<project name="jpf-jmt" default="dist" basedir=".">
+  <description>
+    Java PathFinder -- Memory Tools
+  </description>
+
+  <!-- Set the directories -->
+  <property name="src.dir" location="src/main" />
+  <property name="build.dir" location="src/classes" />
+  <property name="dist.dir" location="dist" />
+  <property name="lib.dir" location="lib/" />
+
+  <!-- Set the build path -->
+
+  <path id="jmt.classpath">
+    <fileset dir="${lib.dir}">
+        <include name="*.jar"/>
+    </fileset>
+  </path>
+
+  <!-- Make the builddir, just in case -->
+  <target name="init">
+    <mkdir dir="${build.dir}" />
+  </target>
+
+  <!-- Compile all the source files -->
+  <target name="compile" depends="init" description="compile sources">
+    <javac classpathref="jmt.classpath" includeantruntime="false" srcdir="${src.dir}" destdir="${build.dir}" />
+  </target>
+
+  <!-- Make the relevant JAR -->
+  <target name="dist" depends="compile" description="make a JAR">
+    <mkdir dir="${dist.dir}" />
+    <jar jarfile="${dist.dir}/${ant.project.name}.jar" basedir="${build.dir}" />
+  </target>
+
+  <!-- Clean up -->
+  <target name="clean" description="clean up">
+    <delete includeemptydirs="true" failonerror="false">
+      <fileset dir="${build.dir}" includes="**/*"/>
+    </delete>
+    <delete dir="${dist.dir}" />
+  </target>
+</project>
