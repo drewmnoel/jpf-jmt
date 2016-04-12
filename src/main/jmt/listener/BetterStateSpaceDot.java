@@ -230,7 +230,7 @@ public class BetterStateSpaceDot extends ListenerAdapter {
   /**
    * Return the string that will be used to label this state for the user.
    */
-  private String makeDotLabel(Search state, int my_id) {
+  protected String makeDotLabel(Search state, int my_id) {
     Transition trans = state.getTransition();
     if (trans == null) {
       return "-init-";

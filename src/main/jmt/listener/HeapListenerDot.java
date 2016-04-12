@@ -80,8 +80,11 @@ public class HeapListenerDot extends BetterStateSpaceDot {
 	 *
 	 */
 	@Override
-	protected String makeStateLabel(StateInformation state) {
-		return state.id + " [" + this.stateToHeap.get(state.id) + this.prefixLabel + "]";
+	protected String makeDotLabel(Search state, int my_id) {
+		StringBuilder base = new StringBuilder();
+		base.append(super.makeDotLabel(state, my_id));
+		base.append(" [" + this.stateToHeap.get(state.getStateId()) + this.prefixLabel + "]");
+		return base.toString();
 	}
 
 
