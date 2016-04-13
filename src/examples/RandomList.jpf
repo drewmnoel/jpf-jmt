@@ -4,8 +4,9 @@ sourcepath=.
 native_classpath=../classes/
 listener=gov.nasa.jpf.listener.SimpleDot
 cg.enumerate_random=true
-jmt.memory_prefix=KB
 
-# 10 MB in Bytes
-jmt.memory_limit=10485760
+# JMT Specific
+jmt.report.memory_prefix=KB
+jmt.search.memory_units=MB
+jmt.search.memory_limit=10
 search.properties=jmt.vm.NotExceedMemory

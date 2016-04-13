@@ -7,11 +7,29 @@ import gov.nasa.jpf.vm.VM;
 
 public class NotExceedMemory extends GenericProperty {
   Long memory_limit;
+  Long original_limit;
   boolean has_exceeded;
+  String memory_units;
 
   public NotExceedMemory (Config config) {
     has_exceeded = false;
-    memory_limit = config.getLong("jmt.memory_limit", 0);
+
+    memory_units = config.getString("jmt.search.memory_units", "B");
+    memory_limit = config.getLong("jmt.search.memory_limit", 0);
+    original_limit = memory_limit;
+
+    // Update the limit to be in bytes
+    // Intention fallthrough to avoid tricky numbers
+    switch (memory_units) {
+      case "GB":
+        memory_limit *= 1024;
+      case "MB":
+        memory_limit *= 1024;
+      case "KB":
+        memory_limit *= 1024;
+      default:
+        break;
+    }
   }
 
   @Override
@@ -22,7 +40,7 @@ public class NotExceedMemory extends GenericProperty {
   @Override
   public String getErrorMessage () {
     if (has_exceeded == true) {
-      return "Memory exceeded " + memory_limit + " bytes";
+      return "Memory exceeded " + original_limit + " " + memory_units;
     }
 
     return null;
