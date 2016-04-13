@@ -56,7 +56,7 @@ public class HeapListenerDot extends BetterStateSpaceDot {
 		this.stateToHeap = new HashMap<>();
 
 		// Read the prefix from config and set appropriate vars. Default to KB.
-		final String configPrefix = config.getString("memory.prefix", "KB");
+		final String configPrefix = config.getString("jmt.memory_prefix", "KB");
 		switch (configPrefix) {
 		case B_LABEL:
 			this.prefixConstant = HeapListenerDot.B;

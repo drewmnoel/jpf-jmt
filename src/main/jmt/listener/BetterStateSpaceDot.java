@@ -381,7 +381,7 @@ public class BetterStateSpaceDot extends ListenerAdapter {
       } else { // The dot version
         graph.write("  st" + state.id + " [label=\"" + makeStateLabel(state));
         if (state.error != null) {
-          graph.write(":" + state.error);
+          graph.write(":" + state.error.replace("\"", "'"));
         }
         graph.write("\",shape=");
         if (state.error != null) {
