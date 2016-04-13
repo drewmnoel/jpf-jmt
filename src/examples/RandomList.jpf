@@ -2,6 +2,10 @@ target=RandomList
 classpath=.
 sourcepath=.
 native_classpath=../classes/
-listener=jmt.listener.HeapListenerDot
+listener=gov.nasa.jpf.listener.SimpleDot
 cg.enumerate_random=true
-memory.prefix=KB
+jmt.memory_prefix=KB
+
+# 10 MB in Bytes
+jmt.memory_limit=10485760
+search.properties=jmt.vm.NotExceedMemory

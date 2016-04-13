@@ -16,13 +16,13 @@ public class NotExceedMemory extends GenericProperty {
 
   @Override
   public String getExplanation () {
-    return "not exceed memory";
+    return "must not exceed memory limit";
   }
 
   @Override
   public String getErrorMessage () {
     if (has_exceeded == true) {
-      return "Memory exceeded " + memory_limit;
+      return "Memory exceeded " + memory_limit + " bytes";
     }
 
     return null;
