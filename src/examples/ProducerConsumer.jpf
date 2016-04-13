@@ -1,0 +1,12 @@
+target=ProducerConsumer
+classpath=.
+sourcepath=.
+native_classpath=../classes/
+listener=gov.nasa.jpf.listener.SimpleDot
+
+# JMT Specific
+jmt.report.memory_prefix=KB
+jmt.search.memory_units=MB
+jmt.search.memory_limit=10
+search.properties=jmt.vm.NotExceedMemory
+search.multiple_errors=true
