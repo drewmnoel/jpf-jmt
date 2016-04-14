@@ -1,7 +1,5 @@
 target=ProducerConsumer
 classpath=.
-sourcepath=.
-native_classpath=../classes/
 listener=jmt.listener.HeapListenerDot
 
 # JMT Specific

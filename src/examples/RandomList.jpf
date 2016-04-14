@@ -1,7 +1,5 @@
 target=RandomList
 classpath=.
-sourcepath=.
-native_classpath=../classes/
 listener=gov.nasa.jpf.listener.SimpleDot
 cg.enumerate_random=true
 
