@@ -53,7 +53,7 @@ public class NotExceedMemory extends GenericProperty {
   public boolean check (Search search, VM vm) {
     Runtime r = Runtime.getRuntime();
     long heap_used = r.totalMemory() - r.freeMemory();
-    has_exceeded = heap_used > memory_limit;
+    has_exceeded = heap_used > memory_limit && memory_limit > 0;
 
     return !has_exceeded;
   }
