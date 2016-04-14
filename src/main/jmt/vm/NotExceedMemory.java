@@ -27,8 +27,11 @@ public class NotExceedMemory extends GenericProperty {
         memory_limit *= 1024;
       case "KB":
         memory_limit *= 1024;
-      default:
+      case "B":
         break;
+      case "%":
+        Runtime r = Runtime.getRuntime();
+        memory_limit = (r.totalMemory() - r.freeMemory()) * (memory_limit / 100);
     }
   }
 
