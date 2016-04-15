@@ -2,9 +2,17 @@ target=ProducerConsumer
 classpath=.
 listener=jmt.listener.HeapListenerDot
 
+###################
 # JMT Specific
+###################
+
+# Set the reporting prefix to KB
 jmt.report.memory_prefix=KB
+
+# Constrain the search to 200% of starting memory
 jmt.search.memory_units=%
 jmt.search.memory_limit=200
 search.properties=jmt.vm.NotExceedMemory
+
+# Do not break on first error
 search.multiple_errors=true
