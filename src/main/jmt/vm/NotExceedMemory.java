@@ -52,7 +52,7 @@ public class NotExceedMemory extends GenericProperty {
       case "%":
         Runtime r = Runtime.getRuntime();
         memory_limit = (r.totalMemory() - r.freeMemory()) * (memory_limit / 100);
-        break
+        break;
     }
   }
 
