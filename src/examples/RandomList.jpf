@@ -3,8 +3,14 @@ classpath=.
 listener=gov.nasa.jpf.listener.SimpleDot
 cg.enumerate_random=true
 
+###################
 # JMT Specific
+###################
+
+# Set the reporting prefix to KB
 jmt.report.memory_prefix=KB
+
+# Constrain the search to 10MB heap
 jmt.search.memory_units=MB
 jmt.search.memory_limit=10
 search.properties=jmt.vm.NotExceedMemory
