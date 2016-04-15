@@ -19,32 +19,30 @@ import jmt.util.StateInformation;
  *
  */
 public class HeapListenerDot extends BetterStateSpaceDot {
-	/* Constants to represent granularity */
-	/** Track usage as bytes */
+	/** Conversion from bytes to bytes */
 	private static final long B = 1;
 	/** Label for bytes */
 	private static final String B_LABEL = "B";
-	/** Track usage as kilobytes */
+	/** Conversion from bytes to kilobytes */
 	private static final long KB = 1024;
 	/** Label for kilobytes */
 	private static final String KB_LABEL = "KB";
-	/** Track usage as megabytes */
+	/** Conversion from bytes to megabytes */
 	private static final long MB = HeapListenerDot.KB * 1024;
 	/** Label for megabytes */
 	private static final String MB_LABEL = "MB";
 
 	/** Keep a hook to the runtime */
 	private static Runtime runtime = Runtime.getRuntime();
-
 	/** Keep track of states and heap sizes */
 	private final Map<Integer, Long> stateToHeap;
-
 	/** Track the granularity (and associated label) */
 	private long prefixConstant;
+	/** Remember the prefix label that was passed */
 	private String prefixLabel;
 
 	/**
-	 * Mandatory ctor
+	 * Mandatory ctor, called by JPF
 	 *
 	 * @param config
 	 * @param jpf
@@ -77,13 +75,16 @@ public class HeapListenerDot extends BetterStateSpaceDot {
 
 	/**
 	 * Override the makeStateLabel defined in StateSpaceDot to give our custom labels
-	 *
 	 */
 	@Override
 	protected String makeDotLabel(Search state, int my_id) {
+		// Prepend the StateSpaceDot label
 		StringBuilder base = new StringBuilder();
 		base.append(super.makeDotLabel(state, my_id));
+
+		// Add the heap usage to the label
 		base.append(" [" + this.stateToHeap.get(state.getStateId()) + this.prefixLabel + "]");
+
 		return base.toString();
 	}
 
@@ -93,9 +94,13 @@ public class HeapListenerDot extends BetterStateSpaceDot {
 	 */
 	@Override
 	public void stateAdvanced(Search search) {
+		// Calculate the current heap usage
 		long heapMemory = HeapListenerDot.runtime.totalMemory() - HeapListenerDot.runtime.freeMemory();
 
+		// Convert it up out of bytes and into whatever unit was specified
 		heapMemory = heapMemory / this.prefixConstant;
+
+		// Save this state's usage
 		this.stateToHeap.put(search.getStateId(), heapMemory);
 
 		super.stateAdvanced(search);

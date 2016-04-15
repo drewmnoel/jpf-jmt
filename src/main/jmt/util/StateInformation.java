@@ -1,5 +1,9 @@
 package jmt.util;
 
+/**
+ * Extracted directly from StateSpaceDot, required for the HeapListenerDot
+ * to be able to set the state labels the same way that StateSpaceDot did
+ */
 public class StateInformation {
   public StateInformation() {}
   public void reset(int id, boolean has_next, boolean is_new) {
